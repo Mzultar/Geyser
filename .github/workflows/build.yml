@@ -35,25 +35,18 @@ jobs:
         uses: GeyserMC/actions/setup-gradle-composite@master
         with:
           setup-java_java-version: 25
-
       - name: Build Geyser
         run: ./gradlew :spigot:build -x test -x check
         env:
           BUILD_NUMBER: ${{ steps.release-info.outputs.curentRelease }}
-          
-      - name: Archive Artifacts
-        uses: GeyserMC/actions/upload-multi-artifact@master
+
+      - name: Archive Spigot Artifact
+        uses: actions/upload-artifact@v4
         if: success()
         with:
-          artifacts: |
-            bootstrap/mod/fabric/build/libs/Geyser-Fabric.jar
-            bootstrap/mod/neoforge/build/libs/Geyser-NeoForge.jar
-            bootstrap/standalone/build/libs/Geyser-Standalone.jar
-            bootstrap/spigot/build/libs/Geyser-Spigot.jar
-            bootstrap/bungeecord/build/libs/Geyser-BungeeCord.jar
-            bootstrap/velocity/build/libs/Geyser-Velocity.jar
-            bootstrap/viaproxy/build/libs/Geyser-ViaProxy.jar
-
+          path: bootstrap/spigot/build/libs/Geyser-Spigot.jar
+          name: Geyser-Spigot
+          
       - name: Publish to Maven Repository
         if: ${{ success() && github.repository == 'GeyserMC/Geyser' && (github.ref_name == 'master' || startsWith(github.ref_name, 'api/') || startsWith(github.ref_name, 'feature/')) }}
         run: ./gradlew publish
