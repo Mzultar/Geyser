@@ -49,8 +49,8 @@ mockito = "5.+"
 # plugin versions
 indra = "4.0.0"
 shadow = "9.4.1"
-#architectury-plugin = "3.5-SNAPSHOT"
-#architectury-loom = "1.17-SNAPSHOT"
+architectury-plugin = "3.5-SNAPSHOT"
+architectury-loom = "1.17-SNAPSHOT"
 loom-companion = "1.17-SNAPSHOT"
 minotaur = "2.9.0"
 lombok = "9.2.0"
@@ -165,10 +165,10 @@ mockito = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 lombok = { group = "io.freefair.gradle", name = "lombok-plugin", version.ref = "lombok" }
 indra = { group = "net.kyori", name  = "indra-common", version.ref = "indra" }
 shadow = { group = "com.gradleup.shadow", name = "com.gradleup.shadow.gradle.plugin", version.ref = "shadow" }
-#architectury-plugin = { group = "architectury-plugin", name = "architectury-plugin.gradle.plugin", version.ref = "architectury-plugin" }
-#architectury-loom = { group = "dev.architectury.loom-no-remap", name = "dev.architectury.loom-no-remap.gradle.plugin", version.ref = "architectury-loom" }
+architectury-plugin = { group = "architectury-plugin", name = "architectury-plugin.gradle.plugin", version.ref = "architectury-plugin" }
+architectury-loom = { group = "dev.architectury.loom-no-remap", name = "dev.architectury.loom-no-remap.gradle.plugin", version.ref = "architectury-loom" }
 minotaur = { group = "com.modrinth.minotaur", name = "Minotaur", version.ref = "minotaur" }
-#loom-companion = { group = "dev.architectury.loom-companion", name = "dev.architectury.loom-companion.gradle.plugin", version.ref = "loom-companion" }
+loom-companion = { group = "dev.architectury.loom-companion", name = "dev.architectury.loom-companion.gradle.plugin", version.ref = "loom-companion" }
 
 [plugins]
 indra = { id = "net.kyori.indra", version.ref = "indra" }
