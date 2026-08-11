@@ -198,12 +198,13 @@ public class UpstreamPacketHandler extends LoggingPacketHandler {
         receivedLoginPacket = true;
 
         LoginEncryptionUtils.encryptPlayerConnection(session, loginPacket);
-
+        /*
         if (session.isClosed()) {
             // Can happen if Xbox validation fails
             session.forciblyCloseUpstream();
             return PacketSignal.HANDLED;
         }
+        */
 
         if (geyser.getSessionManager().isXuidAlreadyPending(session.xuid()) || geyser.getSessionManager().sessionByXuid(session.xuid()) != null) {
             session.disconnect(GeyserLocale.getLocaleStringLog("geyser.auth.already_loggedin", session.bedrockUsername()));
