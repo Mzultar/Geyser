@@ -1,19 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
-pluginManagement {
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-        maven("https://repo.opencollab.dev/maven-snapshots/")
-    }
-}
-
 dependencyResolutionManagement {
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-        maven("https://repo.opencollab.dev/maven-snapshots/")
-    }
     versionCatalogs {
         create("libs") {
             from(files("../gradle/libs.versions.toml"))

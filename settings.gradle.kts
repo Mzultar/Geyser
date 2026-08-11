@@ -7,20 +7,11 @@ pluginManagement {
         gradlePluginPortal()
 
         maven("https://repo.opencollab.dev/maven-snapshots/")
-//        maven("https://maven.fabricmc.net/")
-//        maven("https://maven.architectury.dev/")
-//        maven("https://maven.neoforged.net/releases")
+        maven("https://maven.fabricmc.net/")
+        maven("https://maven.architectury.dev/")
+        maven("https://maven.neoforged.net/releases")
     }
     includeBuild("build-logic")
-}
-
-dependencyResolutionManagement {
-    repositories {
-        maven(url = file("libs").toURI())
-        mavenCentral()
-        maven("https://repo.opencollab.dev/main/")
-        maven("https://repo.opencollab.dev/maven-snapshots/")
-    }
 }
 
 rootProject.name = "geyser-parent"
@@ -28,10 +19,10 @@ rootProject.name = "geyser-parent"
 include(":ap")
 include(":api")
 include(":bungeecord")
-//include(":fabric")
-//include(":gametest")
-//include(":neoforge")
-//include(":mod")
+include(":fabric")
+include(":gametest")
+include(":neoforge")
+include(":mod")
 include(":spigot")
 include(":standalone")
 include(":velocity")
@@ -41,10 +32,10 @@ include(":core")
 
 // Specify project dirs
 project(":bungeecord").projectDir = file("bootstrap/bungeecord")
-//project(":fabric").projectDir = file("bootstrap/mod/fabric")
-//project(":gametest").projectDir = file("bootstrap/mod/gametest")
-//project(":neoforge").projectDir = file("bootstrap/mod/neoforge")
-//project(":mod").projectDir = file("bootstrap/mod")
+project(":fabric").projectDir = file("bootstrap/mod/fabric")
+project(":gametest").projectDir = file("bootstrap/mod/gametest")
+project(":neoforge").projectDir = file("bootstrap/mod/neoforge")
+project(":mod").projectDir = file("bootstrap/mod")
 project(":spigot").projectDir = file("bootstrap/spigot")
 project(":standalone").projectDir = file("bootstrap/standalone")
 project(":velocity").projectDir = file("bootstrap/velocity")
