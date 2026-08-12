@@ -196,8 +196,9 @@ public class UpstreamPacketHandler extends LoggingPacketHandler {
             return PacketSignal.HANDLED;
         }
         receivedLoginPacket = true;
-
+        
         LoginEncryptionUtils.encryptPlayerConnection(session, loginPacket);
+        
         /*
         if (session.isClosed()) {
             // Can happen if Xbox validation fails
@@ -206,11 +207,15 @@ public class UpstreamPacketHandler extends LoggingPacketHandler {
         }
         */
 
-        if (geyser.getSessionManager().isXuidAlreadyPending(session.xuid()) || geyser.getSessionManager().sessionByXuid(session.xuid()) != null) {
+        // Безопасно получаем XUID: если authData нет (offline-режим), берем пустую строку
+        String xuid = session.getAuthData() != null ? session.getAuthData().xuid() : "";
+
+        // Проверяем дубликаты только если XUID действительно существует
+        if (!xuid.isEmpty() && (geyser.getSessionManager().isXuidAlreadyPending(xuid) || geyser.getSessionManager().sessionByXuid(xuid) != null)) {
             session.disconnect(GeyserLocale.getLocaleStringLog("geyser.auth.already_loggedin", session.bedrockUsername()));
             return PacketSignal.HANDLED;
         }
-
+        
         // Set the block translation based off of version
         session.setBlockMappings(BlockRegistries.BLOCKS.forVersion(loginPacket.getProtocolVersion()));
         session.setItemMappings(Registries.ITEMS.forVersion(loginPacket.getProtocolVersion()));
