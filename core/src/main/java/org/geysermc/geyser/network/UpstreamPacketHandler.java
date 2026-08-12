@@ -198,7 +198,6 @@ public class UpstreamPacketHandler extends LoggingPacketHandler {
         receivedLoginPacket = true;
         
         LoginEncryptionUtils.encryptPlayerConnection(session, loginPacket);
-        
         /*
         if (session.isClosed()) {
             // Can happen if Xbox validation fails
@@ -207,11 +206,11 @@ public class UpstreamPacketHandler extends LoggingPacketHandler {
         }
         */
 
-        // Безопасно получаем XUID: если authData нет (offline-режим), берем пустую строку
-        String xuid = session.getAuthData() != null ? session.getAuthData().xuid() : "";
+        // Максимально безопасно получаем XUID, защищаясь от null на всех этапах
+        String xuid = session.xuid();
 
-        // Проверяем дубликаты только если XUID действительно существует
-        if (!xuid.isEmpty() && (geyser.getSessionManager().isXuidAlreadyPending(xuid) || geyser.getSessionManager().sessionByXuid(xuid) != null)) {
+        // Проверяем дубликаты, только если xuid не null и не пустой
+        if (xuid != null && !xuid.isEmpty() && (geyser.getSessionManager().isXuidAlreadyPending(xuid) || geyser.getSessionManager().sessionByXuid(xuid) != null)) {
             session.disconnect(GeyserLocale.getLocaleStringLog("geyser.auth.already_loggedin", session.bedrockUsername()));
             return PacketSignal.HANDLED;
         }
